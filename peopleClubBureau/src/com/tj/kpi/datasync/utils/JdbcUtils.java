@@ -1,5 +1,6 @@
 package com.tj.kpi.datasync.utils;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
@@ -17,7 +18,9 @@ public class JdbcUtils {
 
     static {
         try {
-            InputStream in = JdbcUtils.class.getResourceAsStream(dbinfo);
+            String path = JdbcUtils.class.getResource("/").getPath();
+            String websiteURL = (path.replace("/build/classes", "").replace("%20", " ").replace("classes/", "") + dbinfo).replaceFirst("/", "");
+            InputStream in = new FileInputStream(websiteURL);
             Properties properties = new Properties();
             properties.load(in);
             driverName = properties.getProperty("driverName");
@@ -51,7 +54,6 @@ public class JdbcUtils {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            resultSet = null;
             try {
                 if (statement != null) {
                     statement.close();
@@ -59,15 +61,12 @@ public class JdbcUtils {
             } catch (SQLException e) {
                 e.printStackTrace();
             } finally {
-                statement = null;
                 try {
                     if (connection != null) {
                         connection.close();
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                } finally {
-                    connection = null;
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.tj.kpi.datasync.serviceimpl;
+package com.tj.kpi.datasync.service.impl;
 
 import com.tj.kpi.datasync.entity.HRSSBData;
 import com.tj.kpi.datasync.entity.ResultObject;
@@ -31,7 +31,7 @@ public class PeopleClubBureauImpl implements PeopleClubBureau{
             connection = JdbcUtils.getConnection();
             statement = connection.createStatement();
             resultSet = statement.executeQuery(sql);
-            resultList = Transformer.toHRSSBdataList(resultSet);
+            resultList = Transformer.toHRSSBDataList(resultSet);
             resultObject.setResult(resultList);
             if (resultList.isEmpty()){
                 resultObject.setResultCode(ResultCodes.NODATA);
@@ -48,15 +48,15 @@ public class PeopleClubBureauImpl implements PeopleClubBureau{
 
     @Override
     public ResultObject getByDate(String date) {
-        String sql = "select * from smart_city_hrssb WHERE apply_date>= to_date(?,'yyyy-mm') ";
+        String sql = "select * from smart_city_hrssb WHERE apply_date>= ? ";
         ResultObject resultObject = new ResultObject();
         ArrayList<HRSSBData> resultList;
         try {
             connection = JdbcUtils.getConnection();
             preStatement = connection.prepareStatement(sql);
-            preStatement.setString(1, date);
+            preStatement.setLong(1, Long.valueOf(date));
             resultSet = preStatement.executeQuery();
-            resultList = Transformer.toHRSSBdataList(resultSet);
+            resultList = Transformer.toHRSSBDataList(resultSet);
             resultObject.setResult(resultList);
             if (resultList.isEmpty()){
                 resultObject.setResultCode(ResultCodes.NODATA);

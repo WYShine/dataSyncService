@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * Created by C310 on 2017/5/6.
  * 人社局数据
  */
-public class HRSSBData implements Serializable{
+public class HRSSBData implements Serializable {
 
     //当月城镇基本养老保险基金收入
     private double ubeif_income;
@@ -77,7 +77,8 @@ public class HRSSBData implements Serializable{
     private long mi_insured_number;
     //	当月生育保险待遇申报人数
     private long mi_declared_number;
-
+    //创建时间
+    private String createDate;
     //数据对应日期
     private String applyDate;
 
@@ -335,5 +336,13 @@ public class HRSSBData implements Serializable{
 
     public void setApplyDate(String applyDate) {
         this.applyDate = applyDate;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 }

@@ -48,7 +48,7 @@ public class PeopleClubBureauImpl implements PeopleClubBureau{
 
     @Override
     public ResultObject getByDate(String date) {
-        String sql = "select * from smart_city_hrssb WHERE apply_date>= ? ";
+        String sql = "select * from smart_city_hrssb WHERE apply_date> ? ";
         ResultObject resultObject = new ResultObject();
         ArrayList<HRSSBData> resultList;
         try {

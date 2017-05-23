@@ -18,7 +18,7 @@ public interface PeopleClubBureau {
     ResultObject getAll();
 
     /**
-     * 获取指定日期及之后的数据
+     * 获取指定日期之后的数据
      * @param date
      * @return
      */
